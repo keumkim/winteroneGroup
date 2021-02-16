@@ -24,7 +24,7 @@
 
 # 헥사고날 아키텍처 다이어그램 도출
 
-![폴리글랏 아키텍처](https://user-images.githubusercontent.com/53815271/107929578-2f6b5f00-6fbd-11eb-9176-ac3455d5c7be.png)
+![폴리글랏 아키텍처](https://postfiles.pstatic.net/MjAyMTAyMTZfMjkw/MDAxNjEzNDU4Nzg1NTQ0._Oek-mUwCPjEYFzPxYocHPC21LbREy4wb-xFDsF7g1kg.qx-pGvMzmQn7PP2B5SqfgQnLoabF6x4WMJNnehXreicg.PNG.ksquaring/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_2021-02-16_%EC%98%A4%ED%9B%84_3.59.25.png?type=w773)
 
 
 # 구현
