@@ -44,6 +44,9 @@ mvn spring-boot:run
 
 cd gateway
 mvn spring-boot:run  
+
+cd coupon
+mvn spring-boot:run  
 ```
 
 ## DDD 의 적용
