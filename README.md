@@ -45,7 +45,7 @@ mvn spring-boot:run
 cd gateway
 mvn spring-boot:run  
 
-cd coupon
+cd Coupon
 mvn spring-boot:run  
 ```
 
