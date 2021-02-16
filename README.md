@@ -55,68 +55,45 @@ msaez.io 를 통해 구현한 Aggregate 단위로 Entity 를 선언 후, 구현�
 
 Entity Pattern 과 Repository Pattern 을 적용하기 위해 Spring Data REST 의 RestRepository 를 적용하였다.
 
-**SirenOrder 서비스의 SirenOrder.java**
+**Coupon 서비스의 Coupon.java**
 
 ```java 
 package winterschoolone;
 
 import javax.persistence.*;
 import org.springframework.beans.BeanUtils;
-
-import winterschoolone.external.Payment;
-import winterschoolone.external.PaymentService;
-
 import java.util.List;
 
 @Entity
-@Table(name="SirenOrder_table")
-public class SirenOrder {
+@Table(name="Coupon_table")
+public class Coupon {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
+    private Long orderId;
     private String userId;
     private String menuId;
     private Integer qty;
-    private String status;
+    private Integer stampQty;
+    private Integer couponQty;
+    
 
     @PostPersist
     public void onPostPersist(){
-    	Ordered ordered = new Ordered();
-        BeanUtils.copyProperties(this, ordered);
-        ordered.publishAfterCommit();
-
-        //Following code causes dependency to external APIs
-        // it is NOT A GOOD PRACTICE. instead, Event-Policy mapping is recommended.
-
-        Payment payment = new Payment();
-        payment.setOrderId(this.getId());
-        payment.setMenuId(this.menuId);
-        payment.setQty(this.getQty());
-        payment.setUserId(this.getUserId());
-        // mappings goes here
-        SirenOrderApplication.applicationContext.getBean(PaymentService.class)
-        .pay(payment);
+        Issued issued = new Issued();
+        BeanUtils.copyProperties(this, issued);
+        issued.publishAfterCommit();
     }
-
-    @PostUpdate
-    public void onPostUpdate(){
-        Updated updated = new Updated();
-        BeanUtils.copyProperties(this, updated);
-        updated.publishAfterCommit();
-
-
-    }
-
+    
     @PreRemove
-    public void onPreRemove(){
-        OrderCancelled orderCancelled = new OrderCancelled();
-        BeanUtils.copyProperties(this, orderCancelled);
-        orderCancelled.publishAfterCommit();
+    public void onPostUpdate(){
+        Used used = new Used();
+        BeanUtils.copyProperties(this, used);
+        used.publishAfterCommit();
 
 
     }
-
 
     public Long getId() {
         return id;
@@ -124,6 +101,13 @@ public class SirenOrder {
 
     public void setId(Long id) {
         this.id = id;
+    }
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
     public String getUserId() {
         return userId;
@@ -146,63 +130,29 @@ public class SirenOrder {
     public void setQty(Integer qty) {
         this.qty = qty;
     }
-    public String getStatus() {
-        return status;
+
+    public Integer getStampQty() {
+        return stampQty;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStampQty(Integer stampQty) {
+        this.stampQty += stampQty;
     }
-    
+
+    public Integer getCouponQty() {
+        return couponQty;
+    }
+
+    public void setCouponQty(Integer couponQty) {
+        this.couponQty += couponQty;
+    }
+
 }
 ```
 
-**SirenOrder 서비스의 PolicyHandler.java**
+**Coupon 서비스의 PolicyHandler.java**
 ```java
-package winterschoolone;
 
-import winterschoolone.config.kafka.KafkaProcessor;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.stream.annotation.StreamListener;
-import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.stereotype.Service;
-
-@Service
-public class PolicyHandler{
-    @StreamListener(KafkaProcessor.INPUT)
-    public void onStringEventListener(@Payload String eventString){
-
-    }
-    
-    @Autowired
-	SirenOrderRepository sirenOrderRepository;
-
-    @StreamListener(KafkaProcessor.INPUT)
-    public void wheneverAssigned_(@Payload Assigned assigned){
-
-        if(assigned.isMe()){
-        	Optional<SirenOrder> optional = sirenOrderRepository.findById(assigned.getOrderId());
-        	if(optional != null && optional.isPresent())
-        	{
-        		SirenOrder sirenOrder = optional.get();
-        		
-        		sirenOrder.setStatus("Assigned");
-                // view 객체에 이벤트의 eventDirectValue 를 set 함
-                // view 레파지 토리에 save
-            	sirenOrderRepository.save(sirenOrder);
-        	}
-            
-            System.out.println("##### listener  : " + assigned.toJson());
-        }
-    }
-
-}
 ```
 
 - DDD 적용 후 REST API의 테스트를 통하여 정상적으로 동작하는 것을 확인할 수 있었다.  
