@@ -241,6 +241,10 @@ spring:
           uri: http://localhost:8084
           predicates:
             - Path= /sirenOrderHomes/**
+        - id: Coupon
+          uri: http://localhost:8085
+          predicates:
+            - Path= /coupons/**
       globalcors:
         corsConfigurations:
           '[/**]':
@@ -276,6 +280,10 @@ spring:
           uri: http://SirenOrderHome:8080
           predicates:
             - Path= /sirenOrderHomes/**
+        - id: Coupon
+          uri: http://Coupon:8080
+          predicates:
+            - Path= /coupons/**
       globalcors:
         corsConfigurations:
           '[/**]':
