@@ -20,11 +20,11 @@
     1. 고객이 주문상태를 SirenOrderHome에서 확인 할 수 있어야 한다. → CQRS 
 
 # Event Storming 결과
-![Event Storming](https://postfiles.pstatic.net/MjAyMTAyMTZfMTMw/MDAxNjEzNDU5ODUwNDMx.5juB1wBdAUH2OpNg1fmQOq2hov-wUEx9TO-HAxDSKJYg.TLaBJL9TPk8aIncU6L8QnBB-84bi4KMxUJ_vUKG5ZvAg.PNG.ksquaring/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_2021-02-16_%EC%98%A4%ED%9B%84_4.13.42.png?type=w773)
+![Event Storming](https://postfiles.pstatic.net/MjAyMTAyMTZfMjc5/MDAxNjEzNDgzOTg4NjE3.Q2OvB0pQvic2HtmEo9IjqZW_qMHe0Op8T6BgjJ_4Y8Mg.JNHRG3hZrAzAlXEk5zSTuS9YzaCsM3xpxEvejdC_7bYg.PNG.ksquaring/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_2021-02-16_%EC%98%A4%ED%9B%84_10.59.32.png?type=w773)
 
 # 헥사고날 아키텍처 다이어그램 도출
 
-![폴리글랏 아키텍처](https://postfiles.pstatic.net/MjAyMTAyMTZfMjkw/MDAxNjEzNDU4Nzg1NTQ0._Oek-mUwCPjEYFzPxYocHPC21LbREy4wb-xFDsF7g1kg.qx-pGvMzmQn7PP2B5SqfgQnLoabF6x4WMJNnehXreicg.PNG.ksquaring/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_2021-02-16_%EC%98%A4%ED%9B%84_3.59.25.png?type=w773)
+![폴리글랏 아키텍처](https://postfiles.pstatic.net/MjAyMTAyMTZfNjkg/MDAxNjEzNDg0MTc2MjQ4.nbTXjB3DEWrW_TXQ0JbZAfGKcAFZL2QzF-i76DU9VFAg.I48kmGEl953mGpPlxJrS2MfMHcz2OBSDSZfHHkL10y8g.PNG.ksquaring/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_2021-02-16_%EC%98%A4%ED%9B%84_11.02.35.png?type=w773)
 
 
 # 구현
