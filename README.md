@@ -284,11 +284,14 @@ Coupon 서비스의 DB와 SirenOrder의 DB를 다른 DB를 사용하여 폴리�
 </dependency>
 ```
 
-![증빙5](https://user-images.githubusercontent.com/53815271/107909600-e2c35c00-6f9b-11eb-8ec4-e8ef46c07949.png)
-
 **SirenOrder의 pom.xml DB 설정 코드**
-
-![증빙4](https://user-images.githubusercontent.com/53815271/107909551-d17a4f80-6f9b-11eb-8af2-71b4d0112206.png)
+```xml
+<dependency>
+	<groupId>com.h2database</groupId>
+	<artifactId>h2</artifactId>
+	<scope>runtime</scope>
+</dependency>
+```
 
 # 동기식 호출 과 Fallback 처리
 
