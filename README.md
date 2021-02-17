@@ -276,6 +276,13 @@ Materialized View 를 구현하여, 타 마이크로서비스의 데이터 원�
 Coupon 서비스의 DB와 SirenOrder의 DB를 다른 DB를 사용하여 폴리글랏을 만족시키고 있다.
 
 **Coupon의 pom.xml DB 설정 코드**
+```xml
+<dependency>
+	<groupId>org.hsqldb</groupId>
+	<artifactId>hsqldb</artifactId>
+	<scope>runtime</scope>
+</dependency>
+```
 
 ![증빙5](https://user-images.githubusercontent.com/53815271/107909600-e2c35c00-6f9b-11eb-8ec4-e8ef46c07949.png)
 
